@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>哈囉! — ba14</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            background: #FFFFFF;
+            color: #000000;
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .wordmark {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: lowercase;
+        }
+        
+        nav {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+        
+        nav a {
+            color: #000;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            padding: 8px 12px;
+        }
+        
+        nav a:hover {
+            opacity: 0.6;
+        }
+        
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .header-rule {
+            height: 4px;
+            background: #000;
+            width: 100%;
+        }
+        
+        /* Hero */
+        main {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            padding: 60px 40px;
+        }
+        
+        .hero-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .headline-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-top: 20px;
+        }
+        
+        h1 {
+            font-size: clamp(64px, 15vw, 200px);
+            font-weight: 800;
+            line-height: 0.88;
+            letter-spacing: -0.035em;
+            text-align: left;
+        }
+        
+        .arrow {
+            color: #1F6FEB;
+            font-size: clamp(32px, 6vw, 64px);
+            line-height: 1;
+            font-weight: 300;
+        }
+        
+        /* Block Container */
+        .block-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .block-link {
+            display: block;
+            position: relative;
+            width: min(500px, 60vw);
+            height: min(500px, 60vw);
+            outline: none;
+            transition: transform 0.2s ease;
+            filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.13));
+            touch-action: manipulation;
+        }
+        
+        .block-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .block-link:active {
+            transform: translateY(0);
+        }
+        
+        .block-link:focus-visible {
+            outline: 2px solid #000;
+            outline-offset: 6px;
+        }
+        
+        /* Yellow Square - 640px on 1728px canvas = 37.04% */
+        .square {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 37.04%;
+            height: 100%;
+            background: #FFCE00;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* BA14 Seal */
+        .seal {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 800;
+            color: rgba(0, 0, 0, 0.15);
+            line-height: 0.85;
+            text-align: center;
+            letter-spacing: -0.02em;
+            user-select: none;
+            pointer-events: none;
+        }
+        
+        /* Thin Band - 64px on 1728px canvas = 3.7% */
+        .seam {
+            position: absolute;
+            left: 37.04%;
+            top: 0;
+            width: 3.7%;
+            height: 100%;
+            background: #F9413A;
+            z-index: 3;
+        }
+        
+        /* Red Wedge - 45° triangle from band to bottom-right */
+        .wedge {
+            position: absolute;
+            left: 40.74%;
+            top: 0;
+            width: 59.26%;
+            height: 100%;
+            background: #F9413A;
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+            z-index: 2;
+        }
+        
+        /* Shadows */
+        /* Bottom lip shadow under the square (trapezoid) */
+        .square-shadow {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 37.04%;
+            height: 12.5%;
+            background: rgba(0, 0, 0, 0.12);
+            clip-path: polygon(0 0, 100% 0, 87.5% 100%, 0 100%);
+            z-index: 1;
+        }
+        
+        /* Triangular cast shadow under the wedge */
+        .wedge-shadow {
+            position: absolute;
+            left: 40.74%;
+            top: 100%;
+            width: 59.26%;
+            height: 18.75%;
+            background: rgba(0, 0, 0, 0.08);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: 0;
+        }
+        
+        /* Overall drop shadow for depth */
+        .block-link {
+            filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.13));
+        }
+        
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                gap: 60px;
+            }
+            
+            .header-content {
+                padding: 16px 32px;
+            }
+            
+            main {
+                padding: 40px 32px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .header-content {
+                padding: 16px 24px;
+            }
+            
+            main {
+                padding: 32px 24px;
+            }
+            
+            .headline-column {
+                gap: 24px;
+                padding-top: 0;
+            }
+            
+            .block-container {
+                justify-content: center;
+            }
+            
+            .block-link {
+                width: min(400px, 85vw);
+                height: min(400px, 85vw);
+            }
+            
+            h1 {
+                font-size: clamp(56px, 18vw, 120px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 12px 20px;
+            }
+            
+            .header-rule {
+                height: 3px;
+            }
+            
+            nav {
+                gap: 16px;
+                font-size: 13px;
+            }
+            
+            nav a {
+                padding: 6px 8px;
+            }
+            
+            main {
+                padding: 24px 20px;
+                min-height: calc(100vh - 60px);
+            }
+            
+            .headline-column {
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: clamp(48px, 20vw, 80px);
+            }
+            
+            .block-link {
+                width: min(320px, 90vw);
+                height: min(320px, 90vw);
+            }
+            
+            .seal {
+                font-size: clamp(36px, 12vw, 80px);
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            html {
+                -webkit-text-size-adjust: 100%;
+            }
+            
+            body {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+        
+        /* Landscape orientation for mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            main {
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .hero-grid {
+                gap: 40px;
+                align-items: center;
+            }
+            
+            .headline-column {
+                gap: 16px;
+            }
+            
+            h1 {
+                font-size: clamp(40px, 12vw, 80px);
+            }
+            
+            .arrow {
+                font-size: clamp(24px, 5vw, 40px);
+            }
+            
+            .block-link {
+                width: min(280px, 45vh);
+                height: min(280px, 45vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="wordmark">ba14</div>
+            <nav>
+                <a href="landing.html" class="active">Home</a>
+            </nav>
+        </div>
+        <div class="header-rule"></div>
+    </header>
+
+    <main>
+        <div class="hero-grid">
+            <div class="headline-column">
+                <h1>哈囉!</h1>
+                <div class="arrow">↓</div>
+            </div>
+            
+            <div class="block-container">
+                <a href="/grid.html" class="block-link" aria-label="Explore work">
+                    <div class="square">
+                        <div class="seal">BA<br>14</div>
+                    </div>
+                    <div class="seam"></div>
+                    <div class="wedge"></div>
+                    <div class="square-shadow"></div>
+                    <div class="wedge-shadow"></div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Color cycling
+        const COLORS = [
+            { square: '#FFCE00', seam: '#C43630', wedge: '#F9413A' },
+            { square: '#F9413A', seam: '#1557B0', wedge: '#1F6FEB' },
+            { square: '#1F6FEB', seam: '#007D66', wedge: '#00A884' },
+            { square: '#00A884', seam: '#4F1F9E', wedge: '#6D28D9' },
+            { square: '#6D28D9', seam: '#CC9F00', wedge: '#FFCE00' }
+        ];
+        
+        let currentColor = 0;
+        const block = document.querySelector('.block-link');
+        const square = document.querySelector('.square');
+        const seam = document.querySelector('.seam');
+        const wedge = document.querySelector('.wedge');
+        
+        if (block) {
+            // Auto-cycle every 3.5 seconds
+            setInterval(() => {
+                currentColor = (currentColor + 1) % COLORS.length;
+                const colors = COLORS[currentColor];
+                square.style.background = colors.square;
+                seam.style.background = colors.seam;
+                wedge.style.background = colors.wedge;
+            }, 3500);
+            
+            // Page transition on click
+            block.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = block.getAttribute('href');
+                
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;inset:0;background:#fff;opacity:0;transition:opacity .18s ease;z-index:9999;';
+                document.body.appendChild(overlay);
+                
+                requestAnimationFrame(() => overlay.style.opacity = '1');
+                setTimeout(() => window.location.href = url, 180);
+            });
+        }
+    </script>
+</body>
+</html>

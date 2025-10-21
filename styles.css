@@ -1,0 +1,290 @@
+/* Swiss/International Typographic Style — BA14 Landing Page (3D Extrusion) */
+
+:root {
+    --bg: #F5F5F5;
+    --text: #0B0B0B;
+    
+    /* Palette */
+    --blue: #1F6FEB;
+    --red: #F9413A;
+    --yellow: #FFCE00;
+    --green: #00A884;
+    --purple: #6D28D9;
+    
+    /* 3D extrusion colors - darker/different hue for depth */
+    --depth-red: #C43630;
+    --depth-blue: #1557B0;
+    --depth-green: #007D66;
+    --depth-purple: #4F1F9E;
+    --depth-yellow: #CC9F00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header */
+.swiss-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--text);
+    margin-top: 1px;
+}
+
+.wordmark {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+}
+
+.top-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-item {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-item:hover {
+    color: #666;
+}
+
+.nav-item.active {
+    color: var(--blue);
+}
+
+/* Hero Container */
+.hero-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+.hero-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+/* Headline */
+.headline-column {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.hero-headline {
+    font-size: clamp(4rem, 9vw, 8.75rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--text);
+}
+
+.arrow-indicator {
+    color: var(--blue);
+    font-size: 3rem;
+    line-height: 1;
+}
+
+/* Right Column - Extruded Block */
+.square-column {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Extruded Block Container - 2.2:1 aspect ratio for 3D depth */
+.extruded-block {
+    position: relative;
+    width: clamp(31.25rem, 55vw, 46.875rem);
+    aspect-ratio: 2.2 / 1;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    transition: transform 0.19s ease, filter 0.19s ease;
+    filter: drop-shadow(0 1.25rem 3.125rem rgba(0, 0, 0, 0.15));
+}
+
+.extruded-block:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 1.5625rem 3.75rem rgba(0, 0, 0, 0.18));
+}
+
+.extruded-block:active {
+    transform: translateY(0);
+    filter: drop-shadow(0 1.125rem 2.8125rem rgba(0, 0, 0, 0.14));
+}
+
+.extruded-block:focus-visible {
+    outline: 3px solid var(--text);
+    outline-offset: 6px;
+}
+
+/* Front Square - Main face (45.45% for 2.2:1 ratio) */
+.front-square {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45.45%;
+    height: 100%;
+    background: var(--color-yellow);
+    z-index: 3;
+}
+
+/* Side Band - Visible 3D depth (6% width) */
+.side-band {
+    position: absolute;
+    top: 0;
+    left: 45.45%;
+    width: 6%;
+    height: 100%;
+    background: var(--depth-red);
+    z-index: 2;
+}
+
+/* Triangle Extrusion - Long diagonal face */
+.triangle-extrusion {
+    position: absolute;
+    top: 0;
+    left: 51.45%;
+    width: 48.55%;
+    height: 100%;
+    background: var(--color-red);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    z-index: 1;
+}
+
+/* Cast Shadow */
+.cast-shadow {
+    position: absolute;
+    left: 51.45%;
+    top: 0.625rem;
+    width: 48.55%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0) 100%);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    filter: blur(3px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Central BA/14 Seal */
+.central-seal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.65);
+    z-index: 3;
+}
+
+.central-seal svg {
+    width: 35%;
+    height: auto;
+}
+
+.seal-line {
+    display: none;
+}
+
+/* Color Variants - Square + Side + Triangle */
+.extruded-block[data-color="0"] .front-square { background: var(--yellow); }
+.extruded-block[data-color="0"] .side-band { background: var(--depth-red); }
+.extruded-block[data-color="0"] .triangle-extrusion { background: var(--red); }
+
+.extruded-block[data-color="1"] .front-square { background: var(--red); }
+.extruded-block[data-color="1"] .side-band { background: var(--depth-blue); }
+.extruded-block[data-color="1"] .triangle-extrusion { background: var(--blue); }
+
+.extruded-block[data-color="2"] .front-square { background: var(--blue); }
+.extruded-block[data-color="2"] .side-band { background: var(--depth-green); }
+.extruded-block[data-color="2"] .triangle-extrusion { background: var(--green); }
+
+.extruded-block[data-color="3"] .front-square { background: var(--green); }
+.extruded-block[data-color="3"] .side-band { background: var(--depth-purple); }
+.extruded-block[data-color="3"] .triangle-extrusion { background: var(--purple); }
+
+.extruded-block[data-color="4"] .front-square { background: var(--purple); }
+.extruded-block[data-color="4"] .side-band { background: var(--depth-yellow); }
+.extruded-block[data-color="4"] .triangle-extrusion { background: var(--yellow); }
+
+/* Page Transition */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.18s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 0 1.5rem;
+    }
+    
+    .square-column {
+        justify-content: center;
+    }
+    
+    .extruded-block {
+        width: 92vw;
+    }
+    
+    .hero-headline {
+        font-size: clamp(3rem, 12vw, 6rem);
+    }
+}

@@ -1,0 +1,4 @@
+- [x] Clean up styles.css duplication and ensure consistent geometry variables
+- [x] Verify extrusion angle is exactly 45° with extended length (update clip-path ratio)
+- [x] Adjust cast shadow to follow extrusion footprint
+- [ ] Reload localhost build to confirm visual fix
