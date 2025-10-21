@@ -1,16 +1,53 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <title>BA14 Grid</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BA14 — Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%;background:#fff;color:#000;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
+    header{position:sticky;top:0;background:#fff;z-index:100}
+    .header-content{max-width:1600px;margin:0 auto;padding:20px 40px;display:flex;align-items:center;justify-content:space-between}
+    .wordmark{font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:lowercase}
+    nav{display:flex;gap:24px;font-size:14px}
+    nav a{color:#000;text-decoration:none;transition:opacity .2s;padding:8px 12px}
+    nav a:hover{opacity:.6}
+    .header-rule{height:4px;background:#000;width:100%}
+    main{max-width:1600px;margin:0 auto;padding:40px}
+    h2{font-size:32px;font-weight:800;letter-spacing:-.01em;margin-bottom:24px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .cell{border:1px solid #000;padding:28px;min-height:140px;display:flex;align-items:flex-end;justify-content:flex-start}
+    .label{font-weight:700;letter-spacing:.02em}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="wordmark">ba14</div>
+      <nav>
+        <!-- IMPORTANT: relative link back to home -->
+        <a href="./">Home</a>
+      </nav>
+    </div>
+    <div class="header-rule"></div>
+  </header>
+
+  <main>
+    <h2>BA14 Tools</h2>
+    <div class="grid">
+      <div class="cell"><span class="label">GPA Calculator</span></div>
+      <div class="cell"><span class="label">Calendar + To-Do</span></div>
+      <div class="cell"><span class="label">Anki Flashcards</span></div>
+      <div class="cell"><span class="label">Focus Timer</span></div>
+      <div class="cell"><span class="label">Notes / Outline</span></div>
+      <div class="cell"><span class="label">Habit & Streaks</span></div>
+    </div>
+  </main>
+</body>
 </html>
