@@ -8,6 +8,7 @@ export default defineConfig({
   base: '/askba14/',
   build: {
     rollupOptions: {
+      // 👇 Tell Vite to include BOTH pages
       input: {
         index: resolve(__dirname, 'index.html'),
         grid:  resolve(__dirname, 'grid.html'),
